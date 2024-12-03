@@ -1,9 +1,9 @@
-﻿using System.Security.Cryptography;
+﻿using ClassLibrary;
 
 List<int> A = [];
 List<int> B = [];
 
-var sr = new StreamReader("C:\\Users\\bmarcotte\\source\\repos\\Advent of Code\\Day 1\\input.txt");
+var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2024, 12, 1)));
 
 var line = sr.ReadLine();
 

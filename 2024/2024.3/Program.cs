@@ -1,6 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿using ClassLibrary;
+using System.Text.RegularExpressions;
 
-var sr = new StreamReader("C:\\Users\\bmarcotte\\source\\repos\\Advent of Code\\Day 3\\input.txt");
+var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2024, 12, 3)));
+
 
 string data = sr.ReadToEnd();
 

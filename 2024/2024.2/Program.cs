@@ -1,4 +1,7 @@
-﻿var sr = new StreamReader("C:\\Users\\bmarcotte\\source\\repos\\Advent of Code\\Day 2\\input.txt");
+﻿using ClassLibrary;
+
+var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2024, 12, 2)));
+
 
 int safe = 0;
 int dampened = 0;
