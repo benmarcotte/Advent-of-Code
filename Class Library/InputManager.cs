@@ -25,7 +25,6 @@ namespace ClassLibrary
             var response = await client.GetAsync($"/{day.Year}/day/{day.Day}/input");
 
             return await response.Content.ReadAsStreamAsync();
-            
         }
     }
 }
