@@ -2,32 +2,39 @@
 using System.Text.RegularExpressions;
 
 int returnal = 0;
+int letterReturnal = 0;
 
 using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2023, 12, 1)));
 {
-    var regex = new Regex(@"(?=([0-9]|one|two|three|four|five|six|seven|eight|nine))");
+    var regex = new Regex(@"[0-9]");
+    var letterRegex = new Regex(@"(?=([0-9]|one|two|three|four|five|six|seven|eight|nine))");
 
     string line;
     while ((line = sr.ReadLine()) != null)
     {
         var matches = regex.Matches(line);
 
+        returnal += int.Parse(matches.First().Value) * 10;
+        returnal += int.Parse(matches.Last().Value);
+
+        matches = letterRegex.Matches(line);
+
         try
         {
-            returnal += int.Parse(matches.First().Groups.Values.Last().Value) * 10;
+            letterReturnal += int.Parse(matches.First().Groups.Values.Last().Value) * 10;
         }
         catch
         {
-            returnal += GetNumberFromString(matches.First().Groups.Values.Last().Value) * 10;
+            letterReturnal += GetNumberFromString(matches.First().Groups.Values.Last().Value) * 10;
         }
 
         try
         {
-            returnal += int.Parse(matches.Last().Groups.Values.Last().Value);
+            letterReturnal += int.Parse(matches.Last().Groups.Values.Last().Value);
         }
         catch
         {
-            returnal += GetNumberFromString(matches.Last().Groups.Values.Last().Value);
+            letterReturnal += GetNumberFromString(matches.Last().Groups.Values.Last().Value);
         }
     }
 }
@@ -49,4 +56,5 @@ static int GetNumberFromString(string value)
     };
 }
 
-Console.WriteLine(returnal);
+Console.WriteLine($"non-letter sum: {returnal}");
+Console.WriteLine($"letter sum: {letterReturnal}");
