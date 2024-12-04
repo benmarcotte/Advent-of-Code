@@ -1,32 +1,34 @@
 ﻿using ClassLibrary;
 using System.Text.RegularExpressions;
 
-var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2023, 12, 1)));
-
 int returnal = 0;
 
-var regex = new Regex(@"(?=([0-9]|one|two|three|four|five|six|seven|eight|nine))");
-
-for(string line = sr.ReadLine(); line != null; line = sr.ReadLine())
+using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2023, 12, 1)));
 {
-    var matches = regex.Matches(line);
+    var regex = new Regex(@"(?=([0-9]|one|two|three|four|five|six|seven|eight|nine))");
 
-    try
+    string line;
+    while ((line = sr.ReadLine()) != null)
     {
-        returnal += int.Parse(matches.First().Groups.Values.Last().Value) * 10;
-    }
-    catch
-    {
-        returnal += GetNumberFromString(matches.First().Groups.Values.Last().Value) * 10;
-    }
+        var matches = regex.Matches(line);
 
-    try
-    {
-        returnal += int.Parse(matches.Last().Groups.Values.Last().Value);
-    }
-    catch
-    {
-        returnal += GetNumberFromString(matches.Last().Groups.Values.Last().Value);
+        try
+        {
+            returnal += int.Parse(matches.First().Groups.Values.Last().Value) * 10;
+        }
+        catch
+        {
+            returnal += GetNumberFromString(matches.First().Groups.Values.Last().Value) * 10;
+        }
+
+        try
+        {
+            returnal += int.Parse(matches.Last().Groups.Values.Last().Value);
+        }
+        catch
+        {
+            returnal += GetNumberFromString(matches.Last().Groups.Values.Last().Value);
+        }
     }
 }
 

@@ -14,7 +14,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="day">Desired day</param>
         /// <returns>The input for the user for the day</returns>
-        public static async Task<Stream> GetInputAsync(DateTime day)
+        public static async Task<Stream> GetInput(DateTime day)
         {
             string cookie = Environment.GetEnvironmentVariable("AOC_COOKIE", EnvironmentVariableTarget.User);
             var uri = new Uri("https://adventofcode.com");

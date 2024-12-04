@@ -1,14 +1,15 @@
 ﻿using ClassLibrary;
 using System.Text.RegularExpressions;
 
-var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2024, 12, 3)));
+string data;
+using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2024, 12, 3)));
+{
+    data = sr.ReadToEnd();
+}
 
+var mulRegex = new Regex(@"(?:mul\()[0-9]{1,3},[0-9]{1,3}\)");
 
-string data = sr.ReadToEnd();
-
-var regex = new Regex(@"(?:mul\()[0-9]{1,3},[0-9]{1,3}\)");
-
-var matches = regex.Matches(data);
+var matches = mulRegex.Matches(data);
 
 int result = 0;
 
@@ -28,7 +29,7 @@ int permittedResults = 0;
 
 foreach (Match p in permitted)
 {
-    var multExpression = regex.Matches(p.Value);
+    var multExpression = mulRegex.Matches(p.Value);
     foreach (Match m in multExpression)
     {
         var split = m.Groups.Values.First().Value.Split(',');

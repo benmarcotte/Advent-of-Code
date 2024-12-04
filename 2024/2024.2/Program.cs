@@ -1,44 +1,42 @@
 ﻿using ClassLibrary;
 
-var sr = new StreamReader(await InputManager.GetInputAsync(new DateTime(2024, 12, 2)));
-
-
 int safe = 0;
 int dampened = 0;
 
+using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2024, 12, 2)));
+{ 
 
-for (string line = sr.ReadLine(); line != null; line = sr.ReadLine())
-{
-    var strs = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-    List<int> nums = [];
-    foreach (var str in strs)
+    string line;
+    while ((line = sr.ReadLine()) != null)
     {
-        nums.Add(int.Parse(str));
-    }
-
-    bool currentlySafe = CheckIfSafe(nums);
-
-    if (currentlySafe) safe++;
-    else
-    {
-        bool safeIfDampened = false;
-        for (int i = 0; i < nums.Count; i++)
+        var strs = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        List<int> nums = [];
+        foreach (var str in strs)
         {
-            var temp = new List<int>(nums);
-            temp.RemoveAt(i);
-            safeIfDampened = CheckIfSafe(temp);
-            if (safeIfDampened)
+            nums.Add(int.Parse(str));
+        }
+
+        bool currentlySafe = CheckIfSafe(nums);
+
+        if (currentlySafe)
+            safe++;
+        else
+        {
+            for (int i = 0; i < nums.Count; i++)
             {
-                dampened++;
-                Console.WriteLine($"Safe after dampening: {line}");
-                break;
+                var temp = new List<int>(nums);
+                temp.RemoveAt(i);
+                if (CheckIfSafe(temp))
+                {
+                    dampened++;
+                    break;
+                }
             }
         }
     }
 }
-sr.Close();
 Console.WriteLine($"safe: {safe}");
-Console.WriteLine($"safe if dampened: {safe} already safe + {dampened} safe after dampened = {safe + dampened}");
+Console.WriteLine($"safe if dampened: {dampened}");
 
 static bool CheckIfSafe(List<int> nums)
 {
