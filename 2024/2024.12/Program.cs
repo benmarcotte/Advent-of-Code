@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Runtime.ExceptionServices;
 
 List<string> map = [];
-//using var sr = new StringReader("RRRRIICCFF\r\nRRRRIICCCF\r\nVVRRRCCFFF\r\nVVRCCCJFFF\r\nVVVVCJJCFE\r\nVVIVCCJJEE\r\nVVIIICJJEE\r\nMIIIIIJJEE\r\nMIIISIJEEE\r\nMMMISSJEEE");
 using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2024, 12, 12)));
 {
     string line;
