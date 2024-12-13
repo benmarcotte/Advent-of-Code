@@ -14,7 +14,6 @@ using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2024, 1
     }
 }
 
-
 HashSet<(int i, int j)> explored = [];
 HashSet<(Fence fence, Guid region)> fenceNodes = [];
 HashSet<(Fence fence, Guid region)> markedFenceNodes = [];
@@ -39,7 +38,6 @@ for (int i = 0; i < map.Count; i++)
 
 foreach (var guid in guids)
 {
-    bool secondTry = false;
     trailcheck:
     var trailStart = fenceNodes.Where(fence => fence.region == guid).First();
     Direction currentDirection;
@@ -302,7 +300,6 @@ foreach (var guid in guids)
         goto trailcheck;
     }
 }
-
 
 int totalPrice = 0;
 int cornerPrice = 0;
