@@ -17,11 +17,6 @@ using var sr = new StreamReader(await InputManager.GetInput(new DateTime(2024, 1
 }
 
 long tokenCount = 0;
-// game.a.x * aTokens + game.b.x * bTokens == game.prize.x
-// aTokens = (game.prize.x - bTokens * game.b.x) / game.a.x
-
-// bTokens * game.b.y = game.prize.y - game.a.y * (game.prize.x - bTokens * game.b.x) / game.a.x 
-// game.a.y * aTokens + game.b.y * bTokens == game.prize.y
 
 foreach (var game in games)
 {
